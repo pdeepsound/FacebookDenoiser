@@ -1,8 +1,8 @@
 dset:
-  train: egs/dns/tr
-  valid:
-  test: egs/dns/tt
+  train: /home/azureuser/code/audio_enhancement/data/audiobooks_prodnoise/train
+  valid: /home/azureuser/code/audio_enhancement/data/audiobooks_prodnoise/val
+  test: 
   noisy_json:
   noisy_dir:
   matching: dns
-eval_every: 4
+eval_every: 1

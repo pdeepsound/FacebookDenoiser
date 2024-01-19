@@ -1,13 +1,14 @@
 defaults:
-  - dset: debug
+  - dset: dns
   - hydra/job_logging: colorlog
   - hydra/hydra_logging: colorlog
 
 # Dataset related
-sample_rate: 16000
+sample_rate: 8000
 segment: 4
 stride: 1    # in seconds, how much to stride between training examples
 pad: true   # if training sample is too short, pad it
+predict_both: true
 
 # Dataset Augmentation
 remix: false   # remix noise and clean
@@ -29,13 +30,16 @@ continue_from: '' # Path the a checkpoint.th file to start from.
                   # this is not used in the name of the experiment!
                   # so use a dummy=something not to mixup experiments.
 continue_best: false  # continue from best, not last state if continue_from is set.
-continue_pretrained:   # use either dns48, dns64 or master64 to fine tune from pretrained-model
+continue_pretrained: #dns64   # use either dns48, dns64 or master64 to fine tune from pretrained-model
 restart: false # Ignore existing checkpoints
 checkpoint_file: checkpoint.th
 best_file: best.th  # will contain only best model at any point
 history_file: history.json
 samples_dir: samples
 save_again: false  # if true, only load checkpoint and save again, useful to reexport best.th
+
+load_pretrained: True
+pretrained_path: /home/azureuser/code/audio_enhancement/pretrained_weights/2_channel_dns64.th
 
 # Other stuff
 seed: 2036
@@ -62,8 +66,8 @@ batch_size: 64
 model: demucs # either demucs or dwave
 demucs:
   chin: 1
-  chout: 1
-  hidden: 48
+  chout: 2
+  hidden: 64
   max_hidden: 10000
   causal: true
   glu: true
